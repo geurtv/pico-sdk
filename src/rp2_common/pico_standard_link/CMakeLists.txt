@@ -5,6 +5,7 @@ if (NOT TARGET pico_standard_link)
         ${CMAKE_CURRENT_LIST_DIR}/crt0.S
         ${CMAKE_CURRENT_LIST_DIR}/new_delete.cpp
         ${CMAKE_CURRENT_LIST_DIR}/wrap_eh_globals.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/wrap_emutls.c
         ${CMAKE_CURRENT_LIST_DIR}/binary_info.c
     )
 
@@ -12,6 +13,7 @@ if (NOT TARGET pico_standard_link)
 
     pico_wrap_function(pico_standard_link __cxa_get_globals)
     pico_wrap_function(pico_standard_link __cxa_get_globals_fast)
+    pico_wrap_function(pico_standard_link __emutls_get_address)
 
     # todo revisit when we do Clang
     if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
