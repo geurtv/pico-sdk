@@ -4,10 +4,14 @@ if (NOT TARGET pico_standard_link)
     target_sources(pico_standard_link INTERFACE
         ${CMAKE_CURRENT_LIST_DIR}/crt0.S
         ${CMAKE_CURRENT_LIST_DIR}/new_delete.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/wrap_eh_globals.cpp
         ${CMAKE_CURRENT_LIST_DIR}/binary_info.c
     )
 
     pico_add_map_output(pico_standard_link)
+
+    pico_wrap_function(pico_standard_link __cxa_get_globals)
+    pico_wrap_function(pico_standard_link __cxa_get_globals_fast)
 
     # todo revisit when we do Clang
     if (CMAKE_C_COMPILER_ID STREQUAL "Clang")
